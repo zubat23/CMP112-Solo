@@ -5,11 +5,13 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float moveSpeed = 5f;
+    public float moveSpeed = 50f;
+    public InputAction playerMove;
+
 
     private Rigidbody rb;
     private Vector3 moveDirection;
-    private InputAction playerMove;
+
 
     private void OnEnable()
     {
@@ -23,12 +25,17 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
-        rb = gameObject.AddComponent<Rigidbody>(); 
+        rb = gameObject.GetComponent<Rigidbody>(); 
     }
 
     // Update is called once per frame
     void Update()
     {
-        moveDirection = playerM
+        moveDirection = playerMove.ReadValue<Vector3>();
+    }
+
+    private void FixedUpdate()
+    {
+        rb.linearVelocity = new Vector3(moveDirection.x * moveSpeed, 0, moveDirection.z * moveSpeed);
     }
 }
