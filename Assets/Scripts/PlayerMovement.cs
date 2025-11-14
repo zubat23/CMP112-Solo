@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour
 
     // Speed at which the player moves.
     public float speed = 10f;
-
+    public float jumpForce = 20f;
     public float sensitivity = 50f;
 
     // Start is called before the first frame update.
@@ -39,6 +39,12 @@ public class PlayerController : MonoBehaviour
         movementY = movementVector.y;
 
         
+    }
+
+    void OnJump()
+    {
+        Debug.Log("Jumping");
+        rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
     }
     private void Update()
     {
