@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
     // Speed at which the player moves.
     public float speed = 10f;
     public float jumpForce = 20f;
-    public float sensitivity = 50f;
+    public float rotateSensitivity = 200f;
 
     // Start is called before the first frame update.
     void Start()
@@ -38,30 +38,29 @@ public class PlayerController : MonoBehaviour
         movementX = movementVector.x;
         movementY = movementVector.y;
 
-        
     }
 
     void OnJump()
     {
-        Debug.Log("Jumping");
         rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
     }
     private void Update()
     {
         MouseX = Input.GetAxis("Mouse X");
-        angleVelocity = new Vector3(0, MouseX * sensitivity, 0);
+        transform.Rotate(0, MouseX * rotateSensitivity * Time.deltaTime, 0);
     }
 
     // FixedUpdate is called once per fixed frame-rate frame.
     private void FixedUpdate()
     {
-        // Create a 3D movement vector using the X and Y inputs.
-        Vector3 movement = new Vector3(movementX, 0.0f, movementY);
+        // Create a 3D movement vector using the X and Y inputs
 
+        Vector3 fwdMovement = transform.forward * movementY;
+        Vector3 rightMovement = transform.right * movementX;
+
+        Vector3 movement = fwdMovement + rightMovement;
+        movement.Normalize();
         // Apply force to the Rigidbody to move the player.
         rb.AddForce(movement * speed);
-
-        Quaternion deltaRotation = Quaternion.Euler(angleVelocity * Time.fixedDeltaTime);
-        rb.MoveRotation(rb.rotation * deltaRotation);
     }
 }
