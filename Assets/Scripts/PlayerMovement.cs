@@ -42,7 +42,10 @@ public class PlayerController : MonoBehaviour
 
     void OnJump()
     {
-        rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+        if (isGrounded())
+        {
+            rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+        }
     }
     private void Update()
     {
@@ -62,5 +65,10 @@ public class PlayerController : MonoBehaviour
         movement.Normalize();
         // Apply force to the Rigidbody to move the player.
         rb.AddForce(movement * speed);
+    }
+
+    bool isGrounded()
+    {
+        return Physics.Raycast(transform.position, Vector3.down, 1.3f);
     }
 }

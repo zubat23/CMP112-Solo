@@ -1,9 +1,11 @@
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 public class CameraController : MonoBehaviour
 {
     public Transform target;
+    //public float cameraOffset = 5.0f;
 
     private float yaw;
     private float pitch;
@@ -11,18 +13,20 @@ public class CameraController : MonoBehaviour
 
     private void LateUpdate()
     {
-        yaw = Input.GetAxis("Mouse X");
-        pitch = Input.GetAxis("Mouse Y");
+        yaw += Input.GetAxis("Mouse X");// * Time.deltaTime;
+        pitch += Input.GetAxis("Mouse Y");// * Time.deltaTime;
 
         transform.position = target.position;
 
-        Debug.Log(Quaternion.AngleAxis(yaw, Vector3.up));
         transform.rotation = Quaternion.AngleAxis(yaw,Vector3.up);
         transform.rotation *= Quaternion.AngleAxis(pitch,Vector3.right);
 
-        Vector3 newPosition = transform.position;
-        newPosition.y += 1;
-        newPosition.z -= 5;
-        transform.position = newPosition;
+        transform.Translate(-Vector3.forward * 5.0f);
+
+        //Vector3 newPosition = transform.position;
+        //newPosition.y += 1;
+        //newPosition.z -= 5;
+        //transform.position = newPosition;
+        
     }
 }
