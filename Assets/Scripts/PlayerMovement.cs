@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
+
         // Get and store the Rigidbody component attached to the player.
         rb = GetComponent<Rigidbody>();
     }
@@ -63,8 +64,9 @@ public class PlayerController : MonoBehaviour
 
         Vector3 movement = fwdMovement + rightMovement;
         movement.Normalize();
+
         // Apply force to the Rigidbody to move the player.
-        rb.AddForce(movement * speed);
+        rb.MovePosition(rb.position + movement * speed * Time.fixedDeltaTime);
     }
 
     bool isGrounded()
