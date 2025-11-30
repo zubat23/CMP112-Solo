@@ -19,7 +19,6 @@ public class CameraController : MonoBehaviour
         pitch += Input.GetAxis("Mouse Y") * Time.deltaTime * rotationSpeed;
 
         pitch = Mathf.Clamp(pitch, 10f, 70f);
-        Debug.Log("Yaw: " + yaw + " Pitch: " + pitch);
 
         transform.position = target.position;
 
