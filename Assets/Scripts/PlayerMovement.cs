@@ -16,6 +16,9 @@ public class PlayerController : MonoBehaviour
     private float MouseX;
     private Vector3 angleVelocity;
 
+    private float health = 3f;
+    private bool invulnerable = false;
+
     // Speed at which the player moves.
     public float speed = 10f;
     public float jumpForce = 20f;
@@ -72,5 +75,27 @@ public class PlayerController : MonoBehaviour
     bool isGrounded()
     {
         return Physics.Raycast(transform.position, Vector3.down, 1.3f);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("EnemyHitbox") && !invulnerable)
+        {
+            health--;
+            StartCoroutine(IFrames());
+            Debug.Log("Player Health: " + health);
+
+            if (health == 0)
+            {
+                Destroy(this.gameObject);
+            }
+        }
+    }
+
+    IEnumerator IFrames()
+    {
+        invulnerable = true;
+        yield return new WaitForSeconds(0.5f);
+        invulnerable = false;
     }
 }
