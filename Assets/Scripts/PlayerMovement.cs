@@ -32,25 +32,6 @@ public class PlayerController : MonoBehaviour
         // Get and store the Rigidbody component attached to the player.
         rb = GetComponent<Rigidbody>();
     }
-
-    // This function is called when a move input is detected.
-    void OnMove(InputValue movementValue)
-    {
-        // Convert the input value into a Vector2 for movement.
-        Vector2 movementVector = movementValue.Get<Vector2>();
-        // Store the X and Y components of the movement.
-        movementX = movementVector.x;
-        movementY = movementVector.y;
-
-    }
-
-    void OnJump()
-    {
-        if (isGrounded())
-        {
-            rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
-        }
-    }
     private void Update()
     {
         MouseX = Input.GetAxis("Mouse X");
@@ -70,6 +51,31 @@ public class PlayerController : MonoBehaviour
 
         // Apply force to the Rigidbody to move the player.
         rb.MovePosition(rb.position + movement * speed * Time.fixedDeltaTime);
+    }
+
+
+    // This function is called when a move input is detected.
+    public void OnMove(InputValue movementValue)
+    {
+        // Convert the input value into a Vector2 for movement.
+        Vector2 movementVector = movementValue.Get<Vector2>();
+        // Store the X and Y components of the movement.
+        movementX = movementVector.x;
+        movementY = movementVector.y;
+
+    }
+
+    public void OnJump()
+    {
+        if (isGrounded())
+        {
+            rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+        }
+    }
+
+    public void OnAttack()
+    {
+        Debug.Log("Bang!");
     }
 
     bool isGrounded()
