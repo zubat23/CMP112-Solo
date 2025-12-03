@@ -7,6 +7,12 @@ using UnityEngine.Rendering;
 
 public class PlayerController : MonoBehaviour
 {
+    // Speed at which the player moves.
+    public float speed = 10f;
+    public float jumpForce = 20f;
+    public float rotateSensitivity = 200f;
+
+    public GameObject bulletPrefab;
     // Rigidbody of the player.
     private Rigidbody rb;
 
@@ -18,11 +24,6 @@ public class PlayerController : MonoBehaviour
 
     private float health = 3f;
     private bool invulnerable = false;
-
-    // Speed at which the player moves.
-    public float speed = 10f;
-    public float jumpForce = 20f;
-    public float rotateSensitivity = 200f;
 
     // Start is called before the first frame update.
     void Start()
@@ -71,11 +72,6 @@ public class PlayerController : MonoBehaviour
         {
             rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
         }
-    }
-
-    public void OnAttack()
-    {
-        Debug.Log("Bang!");
     }
 
     bool isGrounded()
