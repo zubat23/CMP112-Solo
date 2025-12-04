@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class BulletFiring : MonoBehaviour
@@ -8,5 +9,12 @@ public class BulletFiring : MonoBehaviour
     void Update()
     {
         transform.Translate(Vector3.forward * bulletSpeed * Time.deltaTime);
+        StartCoroutine(DestroyAfterTime(5f));
+    }
+
+    IEnumerator DestroyAfterTime(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        Destroy(this.gameObject);
     }
 }

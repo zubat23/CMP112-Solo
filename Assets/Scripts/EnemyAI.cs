@@ -6,6 +6,7 @@ public class EnemyAI : MonoBehaviour
 {
     public GameObject player;
     public float speed = 5;
+    public float health = 50;
 
     private float distance;
     private Rigidbody rb;
@@ -30,6 +31,19 @@ public class EnemyAI : MonoBehaviour
 
             transform.LookAt(player.transform);             //Make the enemy face the player
             transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);      //Ensure the enemy doesn't tilt
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Bullet"))
+        {
+            health = health - 10;
+            Destroy(other.gameObject);
+            if (health <= 0)
+            {
+                Destroy(this.gameObject);
+            }
         }
     }
 }
