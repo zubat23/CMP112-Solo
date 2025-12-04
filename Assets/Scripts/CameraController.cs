@@ -15,19 +15,21 @@ public class CameraController : MonoBehaviour
 
     private void LateUpdate()
     {
-        yaw += Input.GetAxis("Mouse X") * Time.deltaTime * rotationSpeed;
-        pitch += Input.GetAxis("Mouse Y") * Time.deltaTime * rotationSpeed;
+        if (target != null)
+        {
+            yaw += Input.GetAxis("Mouse X") * Time.deltaTime * rotationSpeed;
+            pitch += Input.GetAxis("Mouse Y") * Time.deltaTime * rotationSpeed;
 
-        pitch = Mathf.Clamp(pitch, 10f, 70f);
-        Debug.Log("Yaw: " + yaw + " Pitch: " + pitch);
+            pitch = Mathf.Clamp(pitch, 10f, 70f);
 
-        transform.position = target.position;
+            transform.position = target.position;
 
 
-        transform.rotation = Quaternion.AngleAxis(yaw,Vector3.up);
-        transform.rotation *= Quaternion.AngleAxis(pitch,Vector3.right);
+            transform.rotation = Quaternion.AngleAxis(yaw, Vector3.up);
+            transform.rotation *= Quaternion.AngleAxis(pitch, Vector3.right);
 
-        transform.Translate(-Vector3.forward * cameraOffset);
+            transform.Translate(-Vector3.forward * cameraOffset);
+        }
         
     }
 }
