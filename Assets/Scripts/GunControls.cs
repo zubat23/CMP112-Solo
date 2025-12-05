@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -6,12 +7,19 @@ public class GunControls : MonoBehaviour
 
     public GameObject player;
     public GameObject bulletPrefab;
+    public TextMeshProUGUI ammoText;
 
     public float offset;
 
     private float pitch;
 
     private float ammo = 6f;
+    private float maxAmmo = 6f;
+
+    void Start()
+    {
+        ammoText.text = "Ammo: " + ammo.ToString() + "/" + maxAmmo.ToString();
+    }
 
     // Update is called once per frame
     void Update()
@@ -34,11 +42,13 @@ public class GunControls : MonoBehaviour
         {
             Instantiate(bulletPrefab, transform.position + transform.up * 0.25f, transform.rotation);
             ammo--;
+            ammoText.text = "Ammo: " + ammo.ToString() + "/" + maxAmmo.ToString();
         }
     }
 
     public void OnReload()
     {
         ammo = 6f;
+        ammoText.text = "Ammo: " + ammo.ToString() + "/" + maxAmmo.ToString();
     }
 }

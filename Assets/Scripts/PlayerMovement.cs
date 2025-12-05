@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -11,6 +12,8 @@ public class PlayerController : MonoBehaviour
     public float speed = 10f;
     public float jumpForce = 20f;
     public float rotateSensitivity = 200f;
+
+    public TextMeshProUGUI healthText;
     // Rigidbody of the player.
     private Rigidbody rb;
 
@@ -20,6 +23,7 @@ public class PlayerController : MonoBehaviour
     private float MouseX;
 
     private float health = 3f;
+    private float maxhealth = 3f;
     private bool invulnerable = false;
 
     // Start is called before the first frame update.
@@ -29,6 +33,8 @@ public class PlayerController : MonoBehaviour
 
         // Get and store the Rigidbody component attached to the player.
         rb = GetComponent<Rigidbody>();
+        
+        healthText.text = "Health: " + health.ToString() + "/" + maxhealth.ToString();
     }
     private void Update()
     {
@@ -81,6 +87,7 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("EnemyHitbox") && !invulnerable)
         {
             health--;
+            healthText.text = "Health: " + health.ToString() + "/" + maxhealth.ToString();
             StartCoroutine(IFrames());
             Debug.Log("Player Health: " + health);
 
