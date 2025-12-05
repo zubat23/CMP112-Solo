@@ -19,7 +19,7 @@ public class GunControls : MonoBehaviour
         if (player != null)
         {
             pitch += Input.GetAxis("Mouse Y");
-            pitch = Mathf.Clamp(pitch, 10f, 70f);
+            pitch = Mathf.Clamp(pitch, -10f, 50f);
 
 
             transform.rotation = player.transform.rotation;
@@ -32,7 +32,7 @@ public class GunControls : MonoBehaviour
     {
         if (ammo > 0)
         {
-            Instantiate(bulletPrefab, transform.position, transform.rotation);
+            Instantiate(bulletPrefab, transform.position + transform.up * 0.25f, transform.rotation);
             ammo--;
         }
     }

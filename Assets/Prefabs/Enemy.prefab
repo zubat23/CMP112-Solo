@@ -322,6 +322,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: bearnow3
       objectReference: {fileID: 0}
+    - target: {fileID: 1630794972795428178, guid: 51d60a3badfcded42b65a005bb657439, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: ad0f63dca8430f24ab91c48d343fb181, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
