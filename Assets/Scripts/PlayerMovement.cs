@@ -11,8 +11,6 @@ public class PlayerController : MonoBehaviour
     public float speed = 10f;
     public float jumpForce = 20f;
     public float rotateSensitivity = 200f;
-
-    public GameObject bulletPrefab;
     // Rigidbody of the player.
     private Rigidbody rb;
 
@@ -20,7 +18,6 @@ public class PlayerController : MonoBehaviour
     private float movementX;
     private float movementY;
     private float MouseX;
-    private Vector3 angleVelocity;
 
     private float health = 3f;
     private bool invulnerable = false;
