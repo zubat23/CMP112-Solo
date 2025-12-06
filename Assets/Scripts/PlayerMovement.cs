@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
+using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
 {
@@ -29,7 +30,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update.
     void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
+        UnityEngine.Cursor.lockState = CursorLockMode.Locked;
 
         // Get and store the Rigidbody component attached to the player.
         rb = GetComponent<Rigidbody>();
@@ -95,6 +96,10 @@ public class PlayerController : MonoBehaviour
             {
                 Destroy(this.gameObject);
             }
+        }
+        else if (other.gameObject.CompareTag("Sea"))
+        {
+            transform.position = new Vector3(0, 20, 0);
         }
     }
 

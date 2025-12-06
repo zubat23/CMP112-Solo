@@ -6,6 +6,7 @@ TagManager:
   tags:
   - EnemyHitbox
   - Bullet
+  - Sea
   layers:
   - Default
   - TransparentFX
