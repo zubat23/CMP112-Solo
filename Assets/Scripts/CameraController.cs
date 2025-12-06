@@ -6,7 +6,7 @@ using UnityEngine.UIElements;
 public class CameraController : MonoBehaviour
 {
     public Transform target;
-    public float rotationSpeed = 100.0f;
+    public float sensitivity = 100.0f;
     public float cameraOffset = 5.0f;
 
     private float yaw;
@@ -17,8 +17,9 @@ public class CameraController : MonoBehaviour
     {
         if (target != null)
         {
-            yaw += Input.GetAxis("Mouse X") * Time.deltaTime * rotationSpeed;
-            pitch += Input.GetAxis("Mouse Y") * Time.deltaTime * rotationSpeed;
+            yaw += Input.GetAxis("Mouse X") * Time.deltaTime * sensitivity;
+            pitch += Input.GetAxis("Mouse Y") * Time.deltaTime * sensitivity;
+
 
             pitch = Mathf.Clamp(pitch, 10f, 70f);
 
