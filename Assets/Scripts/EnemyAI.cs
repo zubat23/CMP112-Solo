@@ -8,12 +8,16 @@ public class EnemyAI : MonoBehaviour
     public float speed = 5;
     public float health = 50;
 
+    public GameController gameController;
+
     private float distance;
     private Rigidbody rb;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        player = GameObject.Find("Player");
+        gameController = GameObject.Find("GameController").GetComponent<GameController>();
     }
 
     // Update is called once per frame
@@ -42,6 +46,7 @@ public class EnemyAI : MonoBehaviour
             Destroy(other.gameObject);
             if (health <= 0)
             {
+                gameController.enemiesRemaining--;
                 Destroy(this.gameObject);
             }
         }

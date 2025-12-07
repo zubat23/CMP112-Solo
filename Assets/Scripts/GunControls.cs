@@ -4,7 +4,6 @@ using UnityEngine.Rendering;
 
 public class GunControls : MonoBehaviour
 {
-
     public GameObject player;
     public GameObject bulletPrefab;
     public TextMeshProUGUI ammoText;
