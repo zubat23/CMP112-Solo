@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 1030829658558135328}
   m_Layer: 0
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -262,6 +262,7 @@ MonoBehaviour:
   player: {fileID: 8418094363331361032, guid: 2e68b7db3d01d894a886c0dbd7ecbc77, type: 3}
   speed: 5
   health: 50
+  gameController: {fileID: 0}
 --- !u!1001 &5698589949334019471
 PrefabInstance:
   m_ObjectHideFlags: 0

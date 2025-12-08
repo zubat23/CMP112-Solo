@@ -12,12 +12,11 @@ public class GunControls : MonoBehaviour
 
     private float pitch;
 
-    private float ammo = 6f;
-    private float maxAmmo = 6f;
+    private float ammo = Global.maxAmmo;
 
     void Start()
     {
-        ammoText.text = "Ammo: " + ammo.ToString() + "/" + maxAmmo.ToString();
+        ammoText.text = "Ammo: " + ammo.ToString() + "/" + Global.maxAmmo.ToString();
     }
 
     // Update is called once per frame
@@ -41,13 +40,22 @@ public class GunControls : MonoBehaviour
         {
             Instantiate(bulletPrefab, transform.position + transform.up * 0.25f, transform.rotation);
             ammo--;
-            ammoText.text = "Ammo: " + ammo.ToString() + "/" + maxAmmo.ToString();
+            ammoText.text = "Ammo: " + ammo.ToString() + "/" + Global.maxAmmo.ToString();
+        }
+        else
+        {
+            reloadGun();
         }
     }
 
     public void OnReload()
     {
-        ammo = 6f;
-        ammoText.text = "Ammo: " + ammo.ToString() + "/" + maxAmmo.ToString();
+        reloadGun();
+    }
+
+    public void reloadGun()
+    {
+        ammo = Global.maxAmmo;
+        ammoText.text = "Ammo: " + ammo.ToString() + "/" + Global.maxAmmo.ToString();
     }
 }

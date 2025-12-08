@@ -8,6 +8,7 @@ TagManager:
   - Bullet
   - Sea
   - PlayerTag
+  - Enemy
   layers:
   - Default
   - TransparentFX

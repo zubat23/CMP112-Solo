@@ -4,8 +4,6 @@ public class GameController : MonoBehaviour
 {
     public GameObject enemyPrefab;
 
-    public int enemiesRemaining = 0;
-
     private int wave = 0;
     private float enemiesPerWave = 3;
     private float multiplier = 1f;
@@ -15,18 +13,18 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (enemiesRemaining == 0)
+        if (Global.enemiesRemaining == 0)
         {
             wave++;
             setupWave();
         }
-        Debug.Log("Wave: " + wave + " Enemies Remaining: " + enemiesRemaining);
+        Debug.Log("Wave: " + wave + " Enemies Remaining: " + Global.enemiesRemaining);
     }
 
     void setupWave()
     {
-        enemiesRemaining = Mathf.RoundToInt(enemiesPerWave * multiplier);
-        for (int i = 0; i < enemiesRemaining; i++)
+        Global.enemiesRemaining = Mathf.RoundToInt(enemiesPerWave * multiplier);
+        for (int i = 0; i < Global.enemiesRemaining; i++)
         {
             float spawnX = Random.Range(-90, 30);
             float spawnZ = Random.Range(-50, 40);

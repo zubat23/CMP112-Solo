@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
 {
     // Speed at which the player moves.
     public float speed = 10f;
-    public float jumpForce = 20f;
+    public float jumpForce = 5f;
     public float rotateSensitivity = 200f;
 
     public TextMeshProUGUI healthText;
@@ -23,8 +23,7 @@ public class PlayerController : MonoBehaviour
     private float movementY;
     private float MouseX;
 
-    private float health = 3f;
-    private float maxhealth = 3f;
+    private float health = Global.maxHealth;
     private bool invulnerable = false;
 
     // Start is called before the first frame update.
@@ -35,12 +34,17 @@ public class PlayerController : MonoBehaviour
         // Get and store the Rigidbody component attached to the player.
         rb = GetComponent<Rigidbody>();
         
-        healthText.text = "Health: " + health.ToString() + "/" + maxhealth.ToString();
+        healthText.text = "Health: " + health.ToString() + "/" + Global.maxHealth.ToString();
     }
     private void Update()
     {
         MouseX = Input.GetAxis("Mouse X");
         transform.Rotate(0, MouseX * rotateSensitivity * Time.deltaTime, 0);
+
+        if (Global.enemiesRemaining == 0)
+        {
+            health = Global.maxHealth;
+        }
     }
 
     // FixedUpdate is called once per fixed frame-rate frame.
@@ -55,7 +59,7 @@ public class PlayerController : MonoBehaviour
         movement.Normalize();
 
         // Apply force to the Rigidbody to move the player.
-        rb.MovePosition(rb.position + movement * speed * Time.fixedDeltaTime);
+        rb.MovePosition(rb.position + movement * speed * Global.playerSpeedMult * Time.fixedDeltaTime);
     }
 
 
@@ -74,7 +78,7 @@ public class PlayerController : MonoBehaviour
     {
         if (isGrounded())
         {
-            rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+            rb.AddForce(transform.up * (jumpForce * Global.playerJumpForceMult), ForceMode.Impulse);
         }
     }
 
@@ -88,7 +92,7 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("EnemyHitbox") && !invulnerable)
         {
             health--;
-            healthText.text = "Health: " + health.ToString() + "/" + maxhealth.ToString();
+            healthText.text = "Health: " + health.ToString() + "/" + Global.maxHealth.ToString();
             StartCoroutine(IFrames());
             Debug.Log("Player Health: " + health);
 
