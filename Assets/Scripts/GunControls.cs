@@ -22,7 +22,7 @@ public class GunControls : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (player != null)
+        if (player != null && Global.waveActive)
         {
             pitch += Input.GetAxis("Mouse Y");
             pitch = Mathf.Clamp(pitch, -10f, 50f);
@@ -36,13 +36,13 @@ public class GunControls : MonoBehaviour
 
     public void OnAttack()
     {
-        if (ammo > 0)
+        if (ammo > 0 && Global.waveActive)
         {
             Instantiate(bulletPrefab, transform.position + transform.up * 0.25f, transform.rotation);
             ammo--;
             ammoText.text = "Ammo: " + ammo.ToString() + "/" + Global.maxAmmo.ToString();
         }
-        else
+        else if (Global.waveActive)
         {
             reloadGun();
         }

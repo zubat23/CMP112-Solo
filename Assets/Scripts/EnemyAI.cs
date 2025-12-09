@@ -8,7 +8,7 @@ public class EnemyAI : MonoBehaviour
     public float speed = 5;
     public float health = 50;
 
-
+    private bool isAlive = true;
     private float distance;
     private Rigidbody rb;
 
@@ -43,12 +43,12 @@ public class EnemyAI : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Bullet"))
+        if (other.gameObject.CompareTag("Bullet") && isAlive)
         {
             health = health - Global.bulletDamage;
-            Destroy(other.gameObject);
             if (health <= 0)
             {
+                isAlive = false;
                 Global.enemiesRemaining--;
                 Destroy(this.gameObject);
             }

@@ -311,6 +311,7 @@ MonoBehaviour:
   - {fileID: -91923771, guid: 640ec5f10b9b46c48830534a8872310c, type: 3}
   descriptionText: {fileID: 470345327476054602}
   spriteImage: {fileID: 731369695335594920}
+  upgradeButton: {fileID: 1244497774050911967}
 --- !u!1 &4522318690886470007
 GameObject:
   m_ObjectHideFlags: 0

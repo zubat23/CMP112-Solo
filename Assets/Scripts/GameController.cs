@@ -42,13 +42,21 @@ struct upgradeInfo
     // Update is called once per frame
     void Update()
     {
-        if (Global.enemiesRemaining == 0)
+        if (Global.enemiesRemaining == 0 && Global.waveActive)
         {
+            UnityEngine.Cursor.lockState = CursorLockMode.None;
+            Global.waveActive = false;
+            Global.enemiesRemaining = -1;
             upgradeSelection();
+        }
+        else if (Global.enemiesRemaining == -1 && Global.waveActive)
+        {
+            UnityEngine.Cursor.lockState = CursorLockMode.Locked;
             wave++;
             setupWave();
         }
-        //Debug.Log("Wave: " + wave + " Enemies Remaining: " + Global.enemiesRemaining);
+        
+        Debug.Log("Wave: " + wave + " Enemies Remaining: " + Global.enemiesRemaining);
     }
 
     void setupWave()

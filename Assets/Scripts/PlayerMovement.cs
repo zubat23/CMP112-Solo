@@ -29,8 +29,6 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update.
     void Start()
     {
-        UnityEngine.Cursor.lockState = CursorLockMode.Locked;
-
         // Get and store the Rigidbody component attached to the player.
         rb = GetComponent<Rigidbody>();
         
@@ -38,10 +36,13 @@ public class PlayerController : MonoBehaviour
     }
     private void Update()
     {
-        MouseX = Input.GetAxis("Mouse X");
-        transform.Rotate(0, MouseX * rotateSensitivity * Time.deltaTime, 0);
+        if (Global.waveActive)
+        {
+            MouseX = Input.GetAxis("Mouse X");
+            transform.Rotate(0, MouseX * rotateSensitivity * Time.deltaTime, 0);
+        }
 
-        if (Global.enemiesRemaining == 0)
+        if (!Global.waveActive  )
         {
             health = Global.maxHealth;
         }
@@ -50,16 +51,19 @@ public class PlayerController : MonoBehaviour
     // FixedUpdate is called once per fixed frame-rate frame.
     private void FixedUpdate()
     {
-        // Create a 3D movement vector using the X and Y inputs
+        if (Global.waveActive)
+        {
+            // Create a 3D movement vector using the X and Y inputs
 
-        Vector3 fwdMovement = transform.forward * movementY;
-        Vector3 rightMovement = transform.right * movementX;
+            Vector3 fwdMovement = transform.forward * movementY;
+            Vector3 rightMovement = transform.right * movementX;
 
-        Vector3 movement = fwdMovement + rightMovement;
-        movement.Normalize();
+            Vector3 movement = fwdMovement + rightMovement;
+            movement.Normalize();
 
-        // Apply force to the Rigidbody to move the player.
-        rb.MovePosition(rb.position + movement * speed * Global.playerSpeedMult * Time.fixedDeltaTime);
+            // Apply force to the Rigidbody to move the player.
+            rb.MovePosition(rb.position + movement * speed * Global.playerSpeedMult * Time.fixedDeltaTime);
+        }
     }
 
 
@@ -76,7 +80,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnJump()
     {
-        if (isGrounded())
+        if (isGrounded() && Global.waveActive)
         {
             rb.AddForce(transform.up * (jumpForce * Global.playerJumpForceMult), ForceMode.Impulse);
         }

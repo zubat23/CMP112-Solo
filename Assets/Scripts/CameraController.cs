@@ -15,7 +15,7 @@ public class CameraController : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (target != null)
+        if (target != null && Global.waveActive)
         {
             yaw += Input.GetAxis("Mouse X") * Time.deltaTime * sensitivity;
             pitch += Input.GetAxis("Mouse Y") * Time.deltaTime * sensitivity;
