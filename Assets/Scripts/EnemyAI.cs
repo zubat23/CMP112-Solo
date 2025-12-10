@@ -8,12 +8,14 @@ public class EnemyAI : MonoBehaviour
     public float speed = 5;
     public float health = 50;
 
+    private bool isAlive = true;
     private float distance;
     private Rigidbody rb;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        player = GameObject.Find("Player");
     }
 
     // Update is called once per frame
@@ -32,16 +34,22 @@ public class EnemyAI : MonoBehaviour
             transform.LookAt(player.transform);             //Make the enemy face the player
             transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);      //Ensure the enemy doesn't tilt
         }
+
+        if (Global.enemiesRemaining == 0)
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Bullet"))
+        if (other.gameObject.CompareTag("Bullet") && isAlive)
         {
-            health = health - 10;
-            Destroy(other.gameObject);
+            health = health - Global.bulletDamage;
             if (health <= 0)
             {
+                isAlive = false;
+                Global.enemiesRemaining--;
                 Destroy(this.gameObject);
             }
         }

@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
 {
     // Speed at which the player moves.
     public float speed = 10f;
-    public float jumpForce = 20f;
+    public float jumpForce = 5f;
     public float rotateSensitivity = 200f;
 
     public TextMeshProUGUI healthText;
@@ -23,39 +23,47 @@ public class PlayerController : MonoBehaviour
     private float movementY;
     private float MouseX;
 
-    private float health = 3f;
-    private float maxhealth = 3f;
+    private float health = Global.maxHealth;
     private bool invulnerable = false;
 
     // Start is called before the first frame update.
     void Start()
     {
-        UnityEngine.Cursor.lockState = CursorLockMode.Locked;
-
         // Get and store the Rigidbody component attached to the player.
         rb = GetComponent<Rigidbody>();
         
-        healthText.text = "Health: " + health.ToString() + "/" + maxhealth.ToString();
+        healthText.text = "Health: " + health.ToString() + "/" + Global.maxHealth.ToString();
     }
     private void Update()
     {
-        MouseX = Input.GetAxis("Mouse X");
-        transform.Rotate(0, MouseX * rotateSensitivity * Time.deltaTime, 0);
+        if (Global.waveActive)
+        {
+            MouseX = Input.GetAxis("Mouse X");
+            transform.Rotate(0, MouseX * rotateSensitivity * Time.deltaTime, 0);
+        }
+
+        if (!Global.waveActive  )
+        {
+            health = Global.maxHealth;
+        }
     }
 
     // FixedUpdate is called once per fixed frame-rate frame.
     private void FixedUpdate()
     {
-        // Create a 3D movement vector using the X and Y inputs
+        if (Global.waveActive)
+        {
+            // Create a 3D movement vector using the X and Y inputs
 
-        Vector3 fwdMovement = transform.forward * movementY;
-        Vector3 rightMovement = transform.right * movementX;
+            Vector3 fwdMovement = transform.forward * movementY;
+            Vector3 rightMovement = transform.right * movementX;
 
-        Vector3 movement = fwdMovement + rightMovement;
-        movement.Normalize();
+            Vector3 movement = fwdMovement + rightMovement;
+            movement.Normalize();
 
-        // Apply force to the Rigidbody to move the player.
-        rb.MovePosition(rb.position + movement * speed * Time.fixedDeltaTime);
+            // Apply force to the Rigidbody to move the player.
+            rb.MovePosition(rb.position + movement * speed * Global.playerSpeedMult * Time.fixedDeltaTime);
+        }
     }
 
 
@@ -72,9 +80,9 @@ public class PlayerController : MonoBehaviour
 
     public void OnJump()
     {
-        if (isGrounded())
+        if (isGrounded() && Global.waveActive)
         {
-            rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+            rb.AddForce(transform.up * (jumpForce * Global.playerJumpForceMult), ForceMode.Impulse);
         }
     }
 
@@ -88,7 +96,7 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("EnemyHitbox") && !invulnerable)
         {
             health--;
-            healthText.text = "Health: " + health.ToString() + "/" + maxhealth.ToString();
+            healthText.text = "Health: " + health.ToString() + "/" + Global.maxHealth.ToString();
             StartCoroutine(IFrames());
             Debug.Log("Player Health: " + health);
 

@@ -7,6 +7,8 @@ TagManager:
   - EnemyHitbox
   - Bullet
   - Sea
+  - PlayerTag
+  - Enemy
   layers:
   - Default
   - TransparentFX
