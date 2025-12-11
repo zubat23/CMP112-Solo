@@ -1,0 +1,7 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UIpresets/Button-Stylesheet.uss?fileID=7433441132597879392&amp;guid=95ab602f1ef255d42b8dafbd0d59f2d0&amp;type=3#Button-Stylesheet" />
+    <ui:VisualElement name="panel-container" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Images/TitleScreen.png?fileID=2800000&amp;guid=624a95213b96f124cbb9a9113bbdbd36&amp;type=3#TitleScreen&quot;); -unity-background-scale-mode: scale-and-crop; background-position-x: left 0; background-position-y: top 0;">
+        <ui:Button text="Start Game" name="Start-Game__button" class="button" style="bottom: 0; top: 500px; left: 50px;" />
+        <ui:Button text="Quit" name="Quit-Game__button" class="button" style="height: 80px; width: 300px; top: 550px; left: 50px;" />
+    </ui:VisualElement>
+</ui:UXML>
