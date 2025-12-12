@@ -5,4 +5,5 @@
         <ui:Button text="Restart" name="Restart__button" class="button" style="align-items: center; justify-content: flex-start; top: 600px; left: 800px;" />
         <ui:Button text="Back to Title" name="Back__button" class="button" style="left: 800px; top: 650px;" />
     </ui:VisualElement>
+    <ui:ScrollView />
 </ui:UXML>

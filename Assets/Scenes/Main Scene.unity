@@ -4573,6 +4573,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94a8016b6adaa4243a58a067bf421938, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 875830673}
   enemyPrefab: {fileID: 5523246582023094373, guid: 6dba6391819b3ff4394c0a1bd73fb89e, type: 3}
   upgradePrefab: {fileID: 3420082201369614879, guid: 3abe7460741c5f64b9834fd394ba4be4, type: 3}
   upgradeParent: {fileID: 2031104859}

@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
@@ -41,10 +42,10 @@ public class PlayerController : MonoBehaviour
             MouseX = Input.GetAxis("Mouse X");
             transform.Rotate(0, MouseX * rotateSensitivity * Time.deltaTime, 0);
         }
-
-        if (!Global.waveActive  )
-        {
+        else
+        { 
             health = Global.maxHealth;
+            healthText.text = "Health: " + health.ToString() + "/" + Global.maxHealth.ToString();
         }
     }
 

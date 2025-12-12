@@ -11,6 +11,7 @@ public class Global : MonoBehaviour
     public static float bulletPiercing = 1f;
 
     public static int enemiesRemaining = 0;
+    public static int enemiesDefeated = 0;
 
     public static bool waveActive = true;
 }

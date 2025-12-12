@@ -32,6 +32,11 @@ public class GunControls : MonoBehaviour
             transform.position = player.transform.position + transform.right * 0.7f + transform.up * 0.4f;
             transform.rotation *= Quaternion.AngleAxis(pitch - offset, Vector3.right);
         }
+        else
+        {
+            ammo = Global.maxAmmo;
+            ammoText.text = "Ammo: " + ammo.ToString() + "/" + Global.maxAmmo.ToString();
+        }
     }
 
     public void OnAttack()

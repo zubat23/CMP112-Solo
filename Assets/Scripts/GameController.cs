@@ -1,8 +1,11 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
+    public GameObject player;
     public GameObject enemyPrefab;
     public GameObject upgradePrefab;
     public GameObject upgradeParent;
@@ -13,6 +16,8 @@ public class GameController : MonoBehaviour
     private float multiplierIncrement = 0.5f;
 
     private int upgradesToChoose = 3;
+
+    private bool endingGame = false;
 
     private upgradeInfo[] upgrades = new upgradeInfo[]
     {
@@ -55,7 +60,15 @@ struct upgradeInfo
             wave++;
             setupWave();
         }
-        
+
+        if (player == null && !endingGame)
+        {
+            endingGame = true;
+            UnityEngine.Cursor.lockState = CursorLockMode.None;
+            StartCoroutine(loadDeathScreen());
+
+        }
+
         Debug.Log("Wave: " + wave + " Enemies Remaining: " + Global.enemiesRemaining);
     }
 
@@ -94,5 +107,11 @@ struct upgradeInfo
             
             xPosition += 250f;
         }
+    }
+
+    IEnumerator loadDeathScreen()
+    {
+        yield return new WaitForSeconds(1f);
+        SceneManager.LoadScene("Death Screen");
     }
 }
