@@ -3008,7 +3008,7 @@ Transform:
   m_GameObject: {fileID: 1268805044}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalPosition: {x: -14.95, y: 21.01, z: -15.54}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4573,6 +4573,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94a8016b6adaa4243a58a067bf421938, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 875830673}
   enemyPrefab: {fileID: 5523246582023094373, guid: 6dba6391819b3ff4394c0a1bd73fb89e, type: 3}
   upgradePrefab: {fileID: 3420082201369614879, guid: 3abe7460741c5f64b9834fd394ba4be4, type: 3}
   upgradeParent: {fileID: 2031104859}

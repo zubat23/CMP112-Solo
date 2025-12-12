@@ -1,0 +1,9 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UIpresets/Button-Stylesheet.uss?fileID=7433441132597879392&amp;guid=95ab602f1ef255d42b8dafbd0d59f2d0&amp;type=3#Button-Stylesheet" />
+    <ui:VisualElement name="Background" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Images/DeathScreen.png?fileID=2800000&amp;guid=2b0539f0ed9237a4da71792cbd129813&amp;type=3#DeathScreen&quot;);">
+        <ui:Label text="0 was Too Many Bears!" name="score__label" class="button" style="width: 532px; justify-content: flex-start; align-self: center; top: 560px; align-items: center; -unity-text-align: upper-center;" />
+        <ui:Button text="Restart" name="Restart__button" class="button" style="align-items: center; justify-content: flex-start; top: 600px; left: 800px;" />
+        <ui:Button text="Back to Title" name="Back__button" class="button" style="left: 800px; top: 650px;" />
+    </ui:VisualElement>
+    <ui:ScrollView />
+</ui:UXML>

@@ -50,6 +50,7 @@ public class EnemyAI : MonoBehaviour
             {
                 isAlive = false;
                 Global.enemiesRemaining--;
+                Global.enemiesDefeated++;
                 Destroy(this.gameObject);
             }
         }

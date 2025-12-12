@@ -1,0 +1,8 @@
+.button {
+    -unity-font-style: bold;
+    font-size: 41px;
+    border-left-width: 0;
+    border-right-width: 0;
+    width: 300px;
+    height: 80px;
+}
