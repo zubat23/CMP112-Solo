@@ -16,6 +16,8 @@ public class PlayerController : MonoBehaviour
     public float rotateSensitivity = 200f;
 
     public TextMeshProUGUI healthText;
+
+    public AudioClip damageSound;
     // Rigidbody of the player.
     private Rigidbody rb;
 
@@ -98,6 +100,8 @@ public class PlayerController : MonoBehaviour
         {
             health--;
             healthText.text = "Health: " + health.ToString() + "/" + Global.maxHealth.ToString();
+
+            SfxManager.Instance.PlaySound(damageSound, transform, 1f);
             StartCoroutine(IFrames());
             Debug.Log("Player Health: " + health);
 
@@ -108,7 +112,7 @@ public class PlayerController : MonoBehaviour
         }
         else if (other.gameObject.CompareTag("Sea"))
         {
-            transform.position = new Vector3(0, 20, 0);
+            transform.position = new Vector3(transform.position.x, 20, transform.position.z);
         }
     }
 

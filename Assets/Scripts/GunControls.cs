@@ -5,10 +5,12 @@ using UnityEngine.Rendering;
 public class GunControls : MonoBehaviour
 {
     public GameObject player;
+    public GameObject cameraObject;
     public GameObject bulletPrefab;
     public TextMeshProUGUI ammoText;
 
-    public float offset;
+    public AudioClip GunshotSound;
+    public AudioClip ReloadSound;
 
     private float pitch;
 
@@ -30,7 +32,7 @@ public class GunControls : MonoBehaviour
 
             transform.rotation = player.transform.rotation;
             transform.position = player.transform.position + transform.right * 0.7f + transform.up * 0.4f;
-            transform.rotation *= Quaternion.AngleAxis(pitch - offset, Vector3.right);
+            transform.rotation *= Quaternion.AngleAxis(pitch, Vector3.right);
         }
         else
         {
@@ -43,6 +45,7 @@ public class GunControls : MonoBehaviour
     {
         if (ammo > 0 && Global.waveActive)
         {
+            SfxManager.Instance.PlaySound(GunshotSound, transform, 1f);
             Instantiate(bulletPrefab, transform.position + transform.up * 0.25f, transform.rotation);
             ammo--;
             ammoText.text = "Ammo: " + ammo.ToString() + "/" + Global.maxAmmo.ToString();
@@ -60,6 +63,7 @@ public class GunControls : MonoBehaviour
 
     public void reloadGun()
     {
+        SfxManager.Instance.PlaySound(ReloadSound, transform, 1f);
         ammo = Global.maxAmmo;
         ammoText.text = "Ammo: " + ammo.ToString() + "/" + Global.maxAmmo.ToString();
     }

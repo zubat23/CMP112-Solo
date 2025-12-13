@@ -8,6 +8,9 @@ public class EnemyAI : MonoBehaviour
     public float speed = 5;
     public float health = 50;
 
+    public AudioClip deathSound;
+    public AudioClip hitSound;
+
     private bool isAlive = true;
     private float distance;
     private Rigidbody rb;
@@ -49,9 +52,15 @@ public class EnemyAI : MonoBehaviour
             if (health <= 0)
             {
                 isAlive = false;
+                SfxManager.Instance.PlaySound(deathSound, transform, 1f);
                 Global.enemiesRemaining--;
                 Global.enemiesDefeated++;
+
                 Destroy(this.gameObject);
+            }
+            else
+            {
+                SfxManager.Instance.PlaySound(hitSound, transform, 1f);
             }
         }
     }

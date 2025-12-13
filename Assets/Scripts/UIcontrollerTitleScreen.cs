@@ -7,9 +7,13 @@ public class UIcontrollerTitleScreen : MonoBehaviour
     private Button StartButton;
     private Button QuitButton;
 
+    private AudioSource buttonSound;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        buttonSound = GetComponent<AudioSource>();
+
         var root = GetComponent<UIDocument>().rootVisualElement;
 
         StartButton = root.Q<Button>("Start__button");
@@ -21,10 +25,12 @@ public class UIcontrollerTitleScreen : MonoBehaviour
 
     void OnStartClicked()
     {
+        buttonSound.Play();
         SceneManager.LoadScene("Main Scene");
     }
     void OnQuitClicked()
     {
+        buttonSound.Play();
         Application.Quit();
     }
 }
