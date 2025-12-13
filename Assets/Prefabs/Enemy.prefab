@@ -262,7 +262,8 @@ MonoBehaviour:
   player: {fileID: 8418094363331361032, guid: 2e68b7db3d01d894a886c0dbd7ecbc77, type: 3}
   speed: 5
   health: 50
-  gameController: {fileID: 0}
+  deathSound: {fileID: 8300000, guid: b953ff062a9cfae43a8c2b51eb2ff351, type: 3}
+  hitSound: {fileID: 8300000, guid: 13272b0bf54a34e4b98c9ce7524c0b3e, type: 3}
 --- !u!1001 &5698589949334019471
 PrefabInstance:
   m_ObjectHideFlags: 0

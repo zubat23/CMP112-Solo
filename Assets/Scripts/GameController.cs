@@ -10,6 +10,8 @@ public class GameController : MonoBehaviour
     public GameObject upgradePrefab;
     public GameObject upgradeParent;
 
+    public AudioClip upgradeSound;
+
     private int wave = 0;
     private float enemiesPerWave = 3;
     private float multiplier = 1f;
@@ -56,6 +58,7 @@ struct upgradeInfo
         }
         else if (Global.enemiesRemaining == -1 && Global.waveActive)
         {
+            SfxManager.Instance.PlaySound(upgradeSound, transform, 1f);
             UnityEngine.Cursor.lockState = CursorLockMode.Locked;
             wave++;
             setupWave();
