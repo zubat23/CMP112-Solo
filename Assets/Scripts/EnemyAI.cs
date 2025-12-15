@@ -70,6 +70,10 @@ public class EnemyAI : MonoBehaviour
                 SfxManager.Instance.PlaySound(hitSound, transform, 1f);
             }
         }
+        if (other.gameObject.CompareTag("Sea"))
+        {
+            transform.position = new Vector3(transform.position.x, 25, transform.position.z);
+        }
     }
 
     IEnumerator InvulnerabilityFrames()
