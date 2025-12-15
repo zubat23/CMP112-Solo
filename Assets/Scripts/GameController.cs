@@ -6,16 +6,20 @@ using UnityEngine.SceneManagement;
 public class GameController : MonoBehaviour
 {
     public GameObject player;
-    public GameObject enemyPrefab;
+    public GameObject basicEnemy;
+    public GameObject speedyEnemy;
+    public GameObject bigEnemy;
     public GameObject upgradePrefab;
     public GameObject upgradeParent;
 
     public AudioClip upgradeSound;
 
-    private float enemiesPerWave = 3;
-    private float multiplier = 1f;
-    private float multiplierIncrement = 0.5f;
+    [SerializeField] float enemiesPerWave = 3;
+    [SerializeField] float multiplier = 1f;
+    [SerializeField] float multiplierIncrement = 0.3f;
 
+    [SerializeField] int wave = 0;
+    private int typesOfEnemies = 1;
     private int upgradesToChoose = 3;
 
     private bool endingGame = false;
@@ -86,13 +90,31 @@ struct upgradeInfo
 
     void setupWave()
     {
+        wave++;
+        if (wave == 3 || wave == 6)
+        {
+            typesOfEnemies++;
+        }
         Global.enemiesRemaining = Mathf.RoundToInt(enemiesPerWave * multiplier);
         for (int i = 0; i < Global.enemiesRemaining; i++)
         {
+            int randomEnemyType = Random.Range(0, typesOfEnemies);
+
             float spawnX = Random.Range(-90, 30);
             float spawnZ = Random.Range(-50, 40);
             Vector3 spawnPosition = new Vector3(spawnX, 25.0f, spawnZ);
-            Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
+            switch(randomEnemyType)
+            {
+                case 0:
+                    Instantiate(basicEnemy, spawnPosition, Quaternion.identity);
+                    break;
+                case 1:
+                    Instantiate(speedyEnemy, spawnPosition, Quaternion.identity);
+                    break;
+                case 2:
+                    Instantiate(bigEnemy, spawnPosition, Quaternion.identity);
+                    break;
+            }
         }
         multiplier += multiplierIncrement;
         enemiesPerWave++;
