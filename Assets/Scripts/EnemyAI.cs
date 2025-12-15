@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -7,11 +8,13 @@ public class EnemyAI : MonoBehaviour
     public GameObject player;
     public float speed = 5;
     public float health = 50;
+    public float damage = 10;
 
     public AudioClip deathSound;
     public AudioClip hitSound;
 
     private bool isAlive = true;
+    private bool vulnerable = true;
     private float distance;
     private Rigidbody rb;
 
@@ -29,7 +32,7 @@ public class EnemyAI : MonoBehaviour
             
             distance = Vector3.Distance(rb.transform.position, player.transform.position);
 
-            if (distance > 4f)
+            if (distance > 1f)
             {
                 rb.transform.position = Vector3.MoveTowards(rb.transform.position, player.transform.position, speed * Time.deltaTime);
             }
@@ -49,9 +52,13 @@ public class EnemyAI : MonoBehaviour
         if (other.gameObject.CompareTag("Bullet") && isAlive)
         {
             health = health - Global.bulletDamage;
+            other.gameObject.GetComponent<BulletFiring>().Onhit();
+            other.gameObject.GetComponent<BulletFiring>().checkPiercing();
+
             if (health <= 0)
             {
                 isAlive = false;
+                StartCoroutine(InvulnerabilityFrames());
                 SfxManager.Instance.PlaySound(deathSound, transform, 1f);
                 Global.enemiesRemaining--;
                 Global.enemiesDefeated++;
@@ -63,5 +70,12 @@ public class EnemyAI : MonoBehaviour
                 SfxManager.Instance.PlaySound(hitSound, transform, 1f);
             }
         }
+    }
+
+    IEnumerator InvulnerabilityFrames()
+    {
+        vulnerable = false;
+        yield return new WaitForSeconds(0.3f);
+        vulnerable = true;
     }
 }

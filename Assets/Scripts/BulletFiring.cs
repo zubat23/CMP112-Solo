@@ -11,16 +11,19 @@ public class BulletFiring : MonoBehaviour
     {
         transform.Translate(Vector3.forward * bulletSpeed * Time.deltaTime);
         StartCoroutine(DestroyAfterTime(5f));
-
-        if (bulletPiercing <= 0)
-        {
-            Destroy(this.gameObject);
-        }
     }
 
     public void Onhit()
     {
         bulletPiercing--;
+    }
+
+    public void checkPiercing()
+    {
+        if (bulletPiercing <= 0)
+        {
+            Destroy(this.gameObject);
+        }
     }
     private void OnTriggerEnter(Collider other)
     {

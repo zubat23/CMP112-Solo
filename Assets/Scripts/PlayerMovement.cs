@@ -29,6 +29,8 @@ public class PlayerController : MonoBehaviour
     private float health = Global.maxHealth;
     private bool invulnerable = false;
 
+    [SerializeField] float damageVal = 0f;
+
     // Start is called before the first frame update.
     void Start()
     {
@@ -49,6 +51,7 @@ public class PlayerController : MonoBehaviour
             health = Global.maxHealth;
             healthText.text = "Health: " + health.ToString() + "/" + Global.maxHealth.ToString();
         }
+        damageVal = Global.bulletDamage;
     }
 
     // FixedUpdate is called once per fixed frame-rate frame.
@@ -98,7 +101,7 @@ public class PlayerController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("EnemyHitbox") && !invulnerable)
         {
-            health--;
+            health -= other.gameObject.GetComponentInParent<EnemyAI>().damage;
             healthText.text = "Health: " + health.ToString() + "/" + Global.maxHealth.ToString();
 
             SfxManager.Instance.PlaySound(damageSound, transform, 1f);
