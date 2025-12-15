@@ -43,13 +43,13 @@ public class PlayerController : MonoBehaviour
     {
         if (Global.waveActive)
         {
+            healthText.text = "Health: " + health.ToString() + "/" + Global.maxHealth.ToString();
             MouseX = Input.GetAxis("Mouse X");
             transform.Rotate(0, MouseX * rotateSensitivity * Time.deltaTime, 0);
         }
         else
         { 
             health = Global.maxHealth;
-            healthText.text = "Health: " + health.ToString() + "/" + Global.maxHealth.ToString();
         }
         damageVal = Global.bulletDamage;
     }

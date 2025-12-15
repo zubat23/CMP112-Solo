@@ -26,6 +26,7 @@ public class GunControls : MonoBehaviour
     {
         if (player != null && Global.waveActive)
         {
+            ammoText.text = "Ammo: " + ammo.ToString() + "/" + Global.maxAmmo.ToString();
             pitch += Input.GetAxis("Mouse Y");
             pitch = Mathf.Clamp(pitch, -10f, 50f);
 
@@ -37,7 +38,6 @@ public class GunControls : MonoBehaviour
         else
         {
             ammo = Global.maxAmmo;
-            ammoText.text = "Ammo: " + ammo.ToString() + "/" + Global.maxAmmo.ToString();
         }
     }
 

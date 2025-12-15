@@ -49,7 +49,7 @@ public class EnemyAI : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Bullet") && isAlive)
+        if (other.gameObject.CompareTag("Bullet") && isAlive && vulnerable)
         {
             health = health - Global.bulletDamage;
             other.gameObject.GetComponent<BulletFiring>().Onhit();
@@ -58,7 +58,6 @@ public class EnemyAI : MonoBehaviour
             if (health <= 0)
             {
                 isAlive = false;
-                StartCoroutine(InvulnerabilityFrames());
                 SfxManager.Instance.PlaySound(deathSound, transform, 1f);
                 Global.enemiesRemaining--;
                 Global.enemiesDefeated++;
@@ -67,6 +66,7 @@ public class EnemyAI : MonoBehaviour
             }
             else
             {
+                StartCoroutine(InvulnerabilityFrames());
                 SfxManager.Instance.PlaySound(hitSound, transform, 1f);
             }
         }

@@ -12,7 +12,6 @@ public class GameController : MonoBehaviour
 
     public AudioClip upgradeSound;
 
-    private int wave = 0;
     private float enemiesPerWave = 3;
     private float multiplier = 1f;
     private float multiplierIncrement = 0.5f;
@@ -45,6 +44,19 @@ struct upgradeInfo
             this.upgradeAmount = upgradeAmount;
         }
     }
+    private void Start()
+    {
+        Global.playerSpeedMult = 1f;
+        Global.playerJumpForceMult = 1f;
+        Global.bulletDamage = 10f;
+        Global.maxAmmo = 6f;
+        Global.maxHealth = 30f;
+        Global.bulletPiercing = 1f;
+
+        Global.enemiesDefeated = 0;
+        Global.enemiesRemaining = 0;
+        Global.waveActive = true;
+    }
 
     // Update is called once per frame
     void Update()
@@ -60,7 +72,6 @@ struct upgradeInfo
         {
             SfxManager.Instance.PlaySound(upgradeSound, transform, 1f);
             UnityEngine.Cursor.lockState = CursorLockMode.Locked;
-            wave++;
             setupWave();
         }
 
@@ -71,8 +82,6 @@ struct upgradeInfo
             StartCoroutine(loadDeathScreen());
 
         }
-
-        Debug.Log("Wave: " + wave + " Enemies Remaining: " + Global.enemiesRemaining);
     }
 
     void setupWave()

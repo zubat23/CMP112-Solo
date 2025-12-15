@@ -25,17 +25,6 @@ public class BulletFiring : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("Enemy"))
-        {
-            bulletPiercing--;
-            if (bulletPiercing <= 0)
-            {
-                Destroy(this.gameObject);
-            }
-        }
-    }
     IEnumerator DestroyAfterTime(float delay)
     {
         yield return new WaitForSeconds(delay);
