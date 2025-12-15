@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -12,8 +13,12 @@ public class GunControls : MonoBehaviour
     public AudioClip GunshotSound;
     public AudioClip ReloadSound;
 
+    public float offset;
+
     private float pitch;
 
+    private bool reloading = false;
+    private float reloadTime = 1f;
     private float ammo = Global.maxAmmo;
 
     void Start()
@@ -27,13 +32,11 @@ public class GunControls : MonoBehaviour
         if (player != null && Global.waveActive)
         {
             ammoText.text = "Ammo: " + ammo.ToString() + "/" + Global.maxAmmo.ToString();
-            pitch += Input.GetAxis("Mouse Y");
-            pitch = Mathf.Clamp(pitch, -10f, 50f);
+            Vector3 rotateAngle = cameraObject.transform.localRotation.eulerAngles;
+            rotateAngle.x -= offset;
 
-
-            transform.rotation = player.transform.rotation;
+            transform.localEulerAngles = rotateAngle;
             transform.position = player.transform.position + transform.right * 0.7f + transform.up * 0.4f;
-            transform.rotation *= Quaternion.AngleAxis(pitch, Vector3.right);
         }
         else
         {
@@ -43,27 +46,35 @@ public class GunControls : MonoBehaviour
 
     public void OnAttack()
     {
-        if (ammo > 0 && Global.waveActive)
+        if(!reloading && Global.waveActive)
         {
-            SfxManager.Instance.PlaySound(GunshotSound, transform, 1f);
-            Instantiate(bulletPrefab, transform.position + transform.up * 0.25f, transform.rotation);
-            ammo--;
-            ammoText.text = "Ammo: " + ammo.ToString() + "/" + Global.maxAmmo.ToString();
-        }
-        else if (Global.waveActive)
-        {
-            reloadGun();
+            if (ammo > 0)
+            {
+                SfxManager.Instance.PlaySound(GunshotSound, transform, 1f);
+                Instantiate(bulletPrefab, transform.position + transform.up * 0.25f, transform.rotation);
+                ammo--;
+                ammoText.text = "Ammo: " + ammo.ToString() + "/" + Global.maxAmmo.ToString();
+            }
+            else
+            {
+                StartCoroutine(reloadGun());
+            }
         }
     }
 
     public void OnReload()
     {
-        reloadGun();
+        if (!reloading) { 
+            StartCoroutine(reloadGun());
+        }
     }
 
-    public void reloadGun()
+    IEnumerator reloadGun()
     {
+        reloading = true;
         SfxManager.Instance.PlaySound(ReloadSound, transform, 1f);
+        yield return new WaitForSeconds(reloadTime);
+        reloading = false;
         ammo = Global.maxAmmo;
         ammoText.text = "Ammo: " + ammo.ToString() + "/" + Global.maxAmmo.ToString();
     }
