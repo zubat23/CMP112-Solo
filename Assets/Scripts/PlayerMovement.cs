@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     public TextMeshProUGUI healthText;
 
     public AudioClip damageSound;
+
     // Rigidbody of the player.
     private Rigidbody rb;
 
@@ -26,32 +27,53 @@ public class PlayerController : MonoBehaviour
     private float movementY;
     private float MouseX;
 
-    private float health = Global.maxHealth;
-    private bool invulnerable = false;
+    //Stores health and if the player is vulnerable
+    [SerializeField] float health = Global.maxHealth;
+    [SerializeField] bool invulnerable = false;
 
+    [SerializeField] float currentMaxHealth = Global.maxHealth;
+
+<<<<<<< Updated upstream
     // Start is called before the first frame update.
+=======
+
+>>>>>>> Stashed changes
     void Start()
     {
         // Get and store the Rigidbody component attached to the player.
         rb = GetComponent<Rigidbody>();
-        
+
+        //Set up health UI appropriately
         healthText.text = "Health: " + health.ToString() + "/" + Global.maxHealth.ToString();
     }
     private void Update()
     {
         if (Global.waveActive)
         {
+<<<<<<< Updated upstream
+=======
+            //Update health UI and rotate the player, if there are enemies.
+            healthText.text = "Health: " + health.ToString() + "/" + Global.maxHealth.ToString();
+>>>>>>> Stashed changes
             MouseX = Input.GetAxis("Mouse X");
             transform.Rotate(0, MouseX * rotateSensitivity * Time.deltaTime, 0);
         }
         else
-        { 
+        {
+            //Reset health between waves.
             health = Global.maxHealth;
             healthText.text = "Health: " + health.ToString() + "/" + Global.maxHealth.ToString();
         }
+<<<<<<< Updated upstream
+=======
+        if (currentMaxHealth != Global.maxHealth)
+        {
+            health = Global.maxHealth;
+            currentMaxHealth = Global.maxHealth;
+        }
+>>>>>>> Stashed changes
     }
 
-    // FixedUpdate is called once per fixed frame-rate frame.
     private void FixedUpdate()
     {
         if (Global.waveActive)
@@ -64,7 +86,7 @@ public class PlayerController : MonoBehaviour
             Vector3 movement = fwdMovement + rightMovement;
             movement.Normalize();
 
-            // Apply force to the Rigidbody to move the player.
+            // Move the position of the Rigidbody based on the movement vector, speed, and time.
             rb.MovePosition(rb.position + movement * speed * Global.playerSpeedMult * Time.fixedDeltaTime);
         }
     }
@@ -83,6 +105,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnJump()
     {
+        //Check if the player is able to jump, if yes then apply force.
         if (isGrounded() && Global.waveActive)
         {
             rb.AddForce(transform.up * (jumpForce * Global.playerJumpForceMult), ForceMode.Impulse);
@@ -96,6 +119,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        //If the player is hit whilst vulnerable, make them take damage.
         if (other.gameObject.CompareTag("EnemyHitbox") && !invulnerable)
         {
             health--;
@@ -112,12 +136,14 @@ public class PlayerController : MonoBehaviour
         }
         else if (other.gameObject.CompareTag("Sea"))
         {
+            //Ensure the player is repositioned if they clip out of bounds.
             transform.position = new Vector3(transform.position.x, 20, transform.position.z);
         }
     }
 
     IEnumerator IFrames()
     {
+        //Make the player invulnerable for 0.5 seconds after being hit.
         invulnerable = true;
         yield return new WaitForSeconds(0.5f);
         invulnerable = false;
