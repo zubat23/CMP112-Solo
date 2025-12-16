@@ -7,12 +7,6 @@ public class GameController : MonoBehaviour
 {
     //Reference to player prefab
     public GameObject player;
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-    public GameObject enemyPrefab;
-=======
-=======
->>>>>>> Stashed changes
 
     //Reference to the prefabs for enemies
     public GameObject basicEnemy;
@@ -20,34 +14,17 @@ public class GameController : MonoBehaviour
     public GameObject bigEnemy;
 
     //Reference to prefabs for upgrades
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
     public GameObject upgradePrefab;
     public GameObject upgradeParent;
 
     public AudioClip upgradeSound;
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-    private int wave = 0;
-    private float enemiesPerWave = 3;
-    private float multiplier = 1f;
-    private float multiplierIncrement = 0.5f;
-=======
-=======
->>>>>>> Stashed changes
     //Info for setting up waves
     [SerializeField] float enemiesPerWave = 3;
     [SerializeField] float multiplier = 1f;
     [SerializeField] float multiplierIncrement = 0.3f;
     [SerializeField] int wave = 0;
     private int typesOfEnemies = 1;
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
 
     private int upgradesToChoose = 3;
 
@@ -79,8 +56,6 @@ public class GameController : MonoBehaviour
             this.upgradeAmount = upgradeAmount;
         }
     }
-<<<<<<< Updated upstream
-=======
     private void Start()
     {
         //Set all global variables to starting values
@@ -95,7 +70,6 @@ public class GameController : MonoBehaviour
         Global.enemiesRemaining = 0;
         Global.waveActive = true;
     }
->>>>>>> Stashed changes
 
     void Update()
     {
@@ -124,17 +98,10 @@ public class GameController : MonoBehaviour
             StartCoroutine(loadDeathScreen());
 
         }
-
-        Debug.Log("Wave: " + wave + " Enemies Remaining: " + Global.enemiesRemaining);
     }
 
     void setupWave()
     {
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-=======
-=======
->>>>>>> Stashed changes
         //increase wave by one, and if it's the correct wave, add different enemies
         wave++;
         if (wave == 3 || wave == 6)
@@ -143,22 +110,11 @@ public class GameController : MonoBehaviour
         }
 
         //Calculate how many enemies to spawn
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
         Global.enemiesRemaining = Mathf.RoundToInt(enemiesPerWave * multiplier);
 
         //Loop for every enemy to spawn
         for (int i = 0; i < Global.enemiesRemaining; i++)
         {
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-            float spawnX = Random.Range(-90, 30);
-            float spawnZ = Random.Range(-50, 40);
-            Vector3 spawnPosition = new Vector3(spawnX, 25.0f, spawnZ);
-            Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
-=======
             //Select random enemy type
             int randomEnemyType = Random.Range(0, typesOfEnemies);
 
@@ -166,15 +122,6 @@ public class GameController : MonoBehaviour
             float spawnX = Random.Range(-90, 30);
             float spawnZ = Random.Range(-50, 40);
             Vector3 spawnPosition = new Vector3(spawnX, 25.0f, spawnZ);
-=======
-            //Select random enemy type
-            int randomEnemyType = Random.Range(0, typesOfEnemies);
-
-            //get position to spawn enemy at
-            float spawnX = Random.Range(-90, 30);
-            float spawnZ = Random.Range(-50, 40);
-            Vector3 spawnPosition = new Vector3(spawnX, 25.0f, spawnZ);
->>>>>>> Stashed changes
 
             //Get what type of enemy to spawn and spawn it
             switch (randomEnemyType)
@@ -189,7 +136,6 @@ public class GameController : MonoBehaviour
                     Instantiate(bigEnemy, spawnPosition, Quaternion.identity);
                     break;
             }
->>>>>>> Stashed changes
         }
         //Increase base value and multiplier for next wave
         multiplier += multiplierIncrement;
