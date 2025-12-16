@@ -14,6 +14,7 @@ public class EnemyAI : MonoBehaviour
     public AudioClip hitSound;
 
     private bool isAlive = true;
+    private bool vulnerable = true;
     private float distance;
     private Rigidbody rb;
     private bool vulnerable = true;
@@ -32,7 +33,7 @@ public class EnemyAI : MonoBehaviour
             //Move towards the player unless too close
             distance = Vector3.Distance(rb.transform.position, player.transform.position);
 
-            if (distance > 4f)
+            if (distance > 1f)
             {
                 rb.transform.position = Vector3.MoveTowards(rb.transform.position, player.transform.position, speed * Time.deltaTime);
             }

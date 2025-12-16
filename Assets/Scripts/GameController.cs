@@ -19,6 +19,7 @@ public class GameController : MonoBehaviour
 
     public AudioClip upgradeSound;
 
+
     //Info for setting up waves
     [SerializeField] float enemiesPerWave = 3;
     [SerializeField] float multiplier = 1f;
@@ -86,7 +87,6 @@ public class GameController : MonoBehaviour
         {
             SfxManager.Instance.PlaySound(upgradeSound, transform, 1f);
             UnityEngine.Cursor.lockState = CursorLockMode.Locked;
-            wave++;
             setupWave();
         }
 

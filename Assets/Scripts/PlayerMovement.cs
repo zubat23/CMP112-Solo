@@ -33,7 +33,6 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] float currentMaxHealth = Global.maxHealth;
 
-
     void Start()
     {
         // Get and store the Rigidbody component attached to the player.

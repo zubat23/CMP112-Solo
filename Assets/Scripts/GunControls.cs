@@ -17,6 +17,7 @@ public class GunControls : MonoBehaviour
     public float offset;
 
     private bool reloading = false;
+
     private float ammo = Global.maxAmmo;
 
     private float currentMaxAmmo = Global.maxAmmo; 
@@ -39,21 +40,12 @@ public class GunControls : MonoBehaviour
             Vector3 rotateAngle = cameraObject.transform.localRotation.eulerAngles;
             rotateAngle.x -= offset;
 
-
-            transform.rotation = player.transform.rotation;
+            transform.localEulerAngles = rotateAngle;
             transform.position = player.transform.position + transform.right * 0.7f + transform.up * 0.4f;
-            transform.rotation = Quaternion.Euler(rotateAngle.x, transform.rotation.y, transform.rotation.z);
         }
         else
         {
             ammo = Global.maxAmmo;
-            ammoText.text = "Ammo: " + ammo.ToString() + "/" + Global.maxAmmo.ToString();
-        }
-
-        if (currentMaxAmmo != Global.maxAmmo)
-        {
-            ammo = Global.maxAmmo;
-            currentMaxAmmo = Global.maxAmmo;
         }
     }
 
@@ -81,7 +73,9 @@ public class GunControls : MonoBehaviour
 
     public void OnReload()
     {
-        reloadGun();
+        if (!reloading) { 
+            StartCoroutine(reloadGun());
+        }
     }
 
     public IEnumerator reloadGun()
