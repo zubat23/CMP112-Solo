@@ -10,20 +10,23 @@ public class deathScreenUI : MonoBehaviour
     private Label scoreLabel;
 
     private AudioSource buttonSound;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    
     void Start()
     {
         buttonSound = GetComponent<AudioSource>();
         var root = GetComponent<UIDocument>().rootVisualElement;
 
+        //Get buttons and labels
         RestartButton = root.Q<Button>("Restart__button");
         MainMenuButton = root.Q<Button>("Back__button");
 
         scoreLabel = root.Q<Label>("score__label");
 
+        //Set up buttons
         RestartButton.clicked += OnRestartClicked;
         MainMenuButton.clicked += OnMainMenuClicked;
 
+        //Display the final score
         scoreLabel.text = (Global.enemiesDefeated + 1).ToString() + " was Too Many Bears!";
     }
 

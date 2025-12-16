@@ -17,12 +17,14 @@ public class CameraController : MonoBehaviour
     {
         if (target != null && Global.waveActive)
         {
+            //Get mouse input and clamp pitch.
             yaw += Input.GetAxis("Mouse X") * Time.deltaTime * sensitivity;
             pitch += Input.GetAxis("Mouse Y") * Time.deltaTime * sensitivity;
 
 
             pitch = Mathf.Clamp(pitch, 10f, 70f);
 
+            //Set camera position and rotation.
             transform.position = target.position;
 
 
