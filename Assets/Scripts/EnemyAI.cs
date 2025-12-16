@@ -17,7 +17,6 @@ public class EnemyAI : MonoBehaviour
     private bool vulnerable = true;
     private float distance;
     private Rigidbody rb;
-    private bool vulnerable = true;
 
     void Start()
     {

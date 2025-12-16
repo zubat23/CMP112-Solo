@@ -82,8 +82,8 @@ public class GunControls : MonoBehaviour
     {
         //Reloads the gun after a delay
         reloading = true;
-        yield return new WaitForSeconds(1f);
         SfxManager.Instance.PlaySound(ReloadSound, transform, 1f);
+        yield return new WaitForSeconds(1f);
         reloading = false;
         ammo = Global.maxAmmo;
         ammoText.text = "Ammo: " + ammo.ToString() + "/" + Global.maxAmmo.ToString();
