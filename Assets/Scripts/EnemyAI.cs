@@ -49,10 +49,13 @@ public class EnemyAI : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         if (other.gameObject.CompareTag("Bullet") && isAlive)
         {
             health = health - Global.bulletDamage;
 =======
+=======
+>>>>>>> Stashed changes
         //If hit by a bullet and alive, take damage.
         if (other.gameObject.CompareTag("Bullet") && isAlive && vulnerable)
         {

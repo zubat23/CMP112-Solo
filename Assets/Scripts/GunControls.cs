@@ -2,6 +2,9 @@
 =======
 using System.Collections;
 using System.Runtime.CompilerServices;
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 using TMPro;
 using UnityEngine;
@@ -22,6 +25,9 @@ public class GunControls : MonoBehaviour
 =======
     public float offset;
 
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 
     private float ammo = Global.maxAmmo;
@@ -40,9 +46,12 @@ public class GunControls : MonoBehaviour
         if (player != null && Global.waveActive)
         {
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
             pitch += Input.GetAxis("Mouse Y");
             pitch = Mathf.Clamp(pitch, -10f, 50f);
 =======
+=======
+>>>>>>> Stashed changes
             //Set the UI text appropriately
             ammoText.text = "Ammo: " + ammo.ToString() + "/" + Global.maxAmmo.ToString();
 
@@ -67,10 +76,17 @@ public class GunControls : MonoBehaviour
             ammo = Global.maxAmmo;
             currentMaxAmmo = Global.maxAmmo;
         }
+
+        if (currentMaxAmmo != Global.maxAmmo)
+        {
+            ammo = Global.maxAmmo;
+            currentMaxAmmo = Global.maxAmmo;
+        }
     }
 
     public void OnAttack()
     {
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
         if (ammo > 0 && Global.waveActive)
         {
@@ -83,6 +99,8 @@ public class GunControls : MonoBehaviour
         {
             reloadGun();
 =======
+=======
+>>>>>>> Stashed changes
         //Check if able to fire
         if(!reloading && Global.waveActive)
         {
@@ -112,7 +130,10 @@ public class GunControls : MonoBehaviour
     public void reloadGun()
     {
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
+=======
+>>>>>>> Stashed changes
         //Reloads the gun after a delay
         reloading = true;
 >>>>>>> Stashed changes
