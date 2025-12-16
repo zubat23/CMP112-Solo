@@ -30,21 +30,9 @@ public class PlayerController : MonoBehaviour
     //Stores health and if the player is vulnerable
     [SerializeField] float health = Global.maxHealth;
     [SerializeField] bool invulnerable = false;
-<<<<<<< Updated upstream
 
     [SerializeField] float currentMaxHealth = Global.maxHealth;
 
-<<<<<<< Updated upstream
-    // Start is called before the first frame update.
-=======
-
->>>>>>> Stashed changes
-=======
-
-    [SerializeField] float currentMaxHealth = Global.maxHealth;
-
-
->>>>>>> Stashed changes
     void Start()
     {
         // Get and store the Rigidbody component attached to the player.
@@ -57,14 +45,8 @@ public class PlayerController : MonoBehaviour
     {
         if (Global.waveActive)
         {
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-=======
-=======
->>>>>>> Stashed changes
             //Update health UI and rotate the player, if there are enemies.
             healthText.text = "Health: " + health.ToString() + "/" + Global.maxHealth.ToString();
->>>>>>> Stashed changes
             MouseX = Input.GetAxis("Mouse X");
             transform.Rotate(0, MouseX * rotateSensitivity * Time.deltaTime, 0);
         }
@@ -72,22 +54,12 @@ public class PlayerController : MonoBehaviour
         {
             //Reset health between waves.
             health = Global.maxHealth;
-            healthText.text = "Health: " + health.ToString() + "/" + Global.maxHealth.ToString();
         }
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-=======
-=======
->>>>>>> Stashed changes
         if (currentMaxHealth != Global.maxHealth)
         {
             health = Global.maxHealth;
             currentMaxHealth = Global.maxHealth;
         }
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
     }
 
     private void FixedUpdate()
@@ -138,7 +110,7 @@ public class PlayerController : MonoBehaviour
         //If the player is hit whilst vulnerable, make them take damage.
         if (other.gameObject.CompareTag("EnemyHitbox") && !invulnerable)
         {
-            health--;
+            health -= other.gameObject.GetComponentInParent<EnemyAI>().damage;
             healthText.text = "Health: " + health.ToString() + "/" + Global.maxHealth.ToString();
 
             SfxManager.Instance.PlaySound(damageSound, transform, 1f);

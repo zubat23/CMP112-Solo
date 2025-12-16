@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -7,11 +8,13 @@ public class EnemyAI : MonoBehaviour
     public GameObject player;
     public float speed = 5;
     public float health = 50;
+    public float damage = 10;
 
     public AudioClip deathSound;
     public AudioClip hitSound;
 
     private bool isAlive = true;
+    private bool vulnerable = true;
     private float distance;
     private Rigidbody rb;
 
@@ -29,7 +32,7 @@ public class EnemyAI : MonoBehaviour
             //Move towards the player unless too close
             distance = Vector3.Distance(rb.transform.position, player.transform.position);
 
-            if (distance > 4f)
+            if (distance > 1f)
             {
                 rb.transform.position = Vector3.MoveTowards(rb.transform.position, player.transform.position, speed * Time.deltaTime);
             }
@@ -48,21 +51,12 @@ public class EnemyAI : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-        if (other.gameObject.CompareTag("Bullet") && isAlive)
-        {
-            health = health - Global.bulletDamage;
-=======
-=======
->>>>>>> Stashed changes
         //If hit by a bullet and alive, take damage.
         if (other.gameObject.CompareTag("Bullet") && isAlive && vulnerable)
         {
             health = health - Global.bulletDamage;
             other.gameObject.GetComponent<BulletFiring>().Onhit();
 
->>>>>>> Stashed changes
             if (health <= 0)
             {
                 isAlive = false;
@@ -74,11 +68,10 @@ public class EnemyAI : MonoBehaviour
             }
             else
             {
+                StartCoroutine(InvulnerabilityFrames());
                 SfxManager.Instance.PlaySound(hitSound, transform, 1f);
             }
         }
-<<<<<<< Updated upstream
-=======
         if (other.gameObject.CompareTag("Sea"))
         {
             //Ensures enemies dont fall off the map.
@@ -91,6 +84,5 @@ public class EnemyAI : MonoBehaviour
         vulnerable = false;
         yield return new WaitForSeconds(0.1f);
         vulnerable = true;
->>>>>>> Stashed changes
     }
 }
